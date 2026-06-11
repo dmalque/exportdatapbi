@@ -37,9 +37,9 @@
   .hero-pill .dot{width:7px;height:7px;border-radius:50%;background:#16a34a;flex-shrink:0;}
 
   /* PROBLEMS SECTION */
-  .problems-section{background:linear-gradient(135deg,#f0f7ff 0%,#e8f0fe 100%);padding:44px 5%;border-top:1px solid #dbeafe;border-bottom:1px solid #dbeafe;}
-  .problems-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;}
-  .problems-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .problems-section{background:linear-gradient(135deg,#f0f7ff 0%,#e8f0fe 100%);padding:36px 5%;border-top:1px solid #dbeafe;border-bottom:1px solid #dbeafe;}
+  .problems-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center;}
+  .problems-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
   .problem-card{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:16px;box-shadow:0 1px 4px rgba(0,0,0,.04);}
   .problem-card .prob{font-size:12px;color:#dc2626;font-weight:600;display:flex;align-items:flex-start;gap:6px;margin-bottom:6px;line-height:1.4;}
   .problem-card .prob span{flex-shrink:0;}
@@ -164,27 +164,11 @@
   </div>
 </section>
 
-<!-- ─── DOWNLOAD STRIP ───────────────────────────────────────── -->
-<div style="background:#fff;border-top:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0;padding:18px 5%;">
-  <div style="max-width:860px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
-    <div style="display:flex;align-items:center;gap:14px;">
-      <div style="width:42px;height:42px;background:#dbeafe;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">📦</div>
-      <div>
-        <div style="font-size:14px;font-weight:700;color:#0f172a;">Export Data PBI — v2.1.0.0</div>
-        <div style="font-size:12px;color:#64748b;">Archivo .pbiviz · Compatible con Power BI Desktop y Service</div>
-      </div>
-    </div>
-    <a href="VISUALExportDATAPBI_2.1.0.0_RELEASE.pbiviz" download style="display:inline-flex;align-items:center;gap:8px;background:#0078d4;color:#fff;padding:10px 22px;border-radius:9px;font-weight:700;font-size:14px;white-space:nowrap;text-decoration:none;">
-      ⬇ Descargar el visual
-    </a>
-  </div>
-</div>
-
 <!-- ─── PROBLEMS + PREVIEW ───────────────────────────────────── -->
 <div class="problems-section">
   <div style="max-width:1100px;margin:0 auto;">
     <p style="font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#475569;margin-bottom:8px;">Por qué la exportación nativa no es suficiente</p>
-    <h2 style="font-size:clamp(18px,2.6vw,26px);font-weight:800;color:#f1f5f9;margin-bottom:24px;">4 problemas reales — resueltos con Export Data PBI</h2>
+    <h2 style="font-size:clamp(18px,2.6vw,26px);font-weight:800;color:#0f172a;margin-bottom:24px;">4 problemas reales — resueltos con Export Data PBI</h2>
     <div class="problems-inner">
       <div class="problems-grid">
         <div class="problem-card">
@@ -209,6 +193,12 @@
           <div class="preview-label">Vista previa del visual</div>
           <img src="preview-visual.png" alt="Botones de exportación del visual" class="preview-img">
           <div class="preview-caption">El usuario elige el formato, se genera<br>el link de descarga y puede descargar<br>su archivo conservando los filtros.</div>
+        </div>
+        <div style="margin-top:14px;text-align:center;">
+          <a href="VISUALExportDATAPBI_2.1.0.0_RELEASE.pbiviz" download style="display:inline-flex;align-items:center;gap:8px;background:#0078d4;color:#fff;padding:10px 20px;border-radius:9px;font-weight:700;font-size:13px;text-decoration:none;width:100%;justify-content:center;box-sizing:border-box;">
+            ⬇ Descargar el visual — v2.1.0.0
+          </a>
+          <div style="font-size:11px;color:#94a3b8;margin-top:7px;">.pbiviz · Power BI Desktop y Service</div>
         </div>
       </div>
     </div>
