@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prueba gratuita 10 días — Export Data PBI</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Segoe UI',system-ui,sans-serif;color:#1e293b;background:#f8fafc;min-height:100vh;display:flex;flex-direction:column;}
+  a{text-decoration:none;color:inherit;}
+
+  nav{display:flex;align-items:center;justify-content:space-between;padding:18px 5%;border-bottom:1px solid #e2e8f0;background:#fff;}
+  .nav-logo{font-size:18px;font-weight:700;color:#0078d4;}
+  .nav-logo span{color:#1e293b;}
+  .back-link{font-size:14px;color:#64748b;display:flex;align-items:center;gap:6px;}
+  .back-link:hover{color:#0078d4;}
+
+  main{flex:1;display:flex;align-items:center;justify-content:center;padding:40px 20px;}
+
+  .card{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:48px 40px;width:100%;max-width:480px;box-shadow:0 4px 24px rgba(0,0,0,.06);}
+
+  .card-badge{display:inline-block;background:#dbeafe;color:#1d4ed8;font-size:12px;font-weight:600;padding:4px 14px;border-radius:20px;margin-bottom:20px;}
+  .card h1{font-size:26px;font-weight:800;color:#0f172a;margin-bottom:8px;}
+  .card-sub{font-size:15px;color:#64748b;margin-bottom:32px;line-height:1.6;}
+
+  .benefits{display:flex;flex-direction:column;gap:10px;margin-bottom:32px;background:#f8fafc;border-radius:10px;padding:16px 18px;}
+  .benefit{display:flex;align-items:center;gap:10px;font-size:14px;color:#475569;}
+  .benefit-icon{width:20px;height:20px;background:#dbeafe;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;}
+
+  .form-group{margin-bottom:18px;}
+  label{display:block;font-size:13px;font-weight:600;color:#374151;margin-bottom:6px;}
+  input{width:100%;padding:11px 14px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:15px;font-family:inherit;color:#0f172a;transition:border .2s;outline:none;}
+  input:focus{border-color:#0078d4;}
+  input::placeholder{color:#94a3b8;}
+  input.error{border-color:#ef4444;}
+  .error-msg{font-size:12px;color:#ef4444;margin-top:4px;display:none;}
+
+  .btn-submit{width:100%;background:#0078d4;color:#fff;border:none;padding:14px;border-radius:10px;font-size:16px;font-weight:700;cursor:pointer;transition:all .2s;font-family:inherit;margin-top:8px;}
+  .btn-submit:hover{background:#005fa3;}
+  .btn-submit:disabled{background:#93c5fd;cursor:not-allowed;}
+
+  .form-note{font-size:12px;color:#94a3b8;text-align:center;margin-top:14px;line-height:1.6;}
+
+  /* Estado de éxito */
+  .success-state{display:none;text-align:center;}
+  .success-icon{width:64px;height:64px;background:#dcfce7;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto 20px;}
+  .success-state h2{font-size:22px;font-weight:800;color:#0f172a;margin-bottom:10px;}
+  .success-state p{font-size:15px;color:#64748b;line-height:1.7;margin-bottom:8px;}
+  .success-email{font-weight:700;color:#0078d4;}
+  .success-key-box{background:#f0f7ff;border:1.5px solid #bfdbfe;border-radius:10px;padding:16px;margin:20px 0;font-family:monospace;font-size:16px;font-weight:700;color:#1e40af;letter-spacing:1px;word-break:break-all;}
+  .key-label{font-size:12px;color:#64748b;font-family:'Segoe UI',sans-serif;font-weight:400;margin-bottom:6px;}
+  .btn-home{display:inline-block;margin-top:16px;background:#0078d4;color:#fff;padding:12px 28px;border-radius:10px;font-weight:600;font-size:15px;}
+  .btn-home:hover{background:#005fa3;}
+
+  /* Estado de carga */
+  .spinner{width:20px;height:20px;border:3px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;display:inline-block;vertical-align:middle;margin-right:8px;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+
+  footer{padding:24px 5%;text-align:center;font-size:12px;color:#94a3b8;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Export<span>DataPBI</span></div>
+  <a href="index.html" class="back-link">← Volver al inicio</a>
+</nav>
+
+<main>
+  <div class="card">
+
+    <!-- Formulario -->
+    <div id="form-state">
+      <span class="card-badge">Sin tarjeta de crédito</span>
+      <h1>Prueba gratis 10 días</h1>
+      <p class="card-sub">Ingresa tu nombre y correo y recibirás tu clave de activación en segundos.</p>
+
+      <div class="benefits">
+        <div class="benefit">
+          <div class="benefit-icon">✓</div>
+          Acceso completo a todas las funciones
+        </div>
+        <div class="benefit">
+          <div class="benefit-icon">✓</div>
+          Exporta hasta 500.000 registros
+        </div>
+        <div class="benefit">
+          <div class="benefit-icon">✓</div>
+          Excel con formato, PDF, CSV, JSON, TXT
+        </div>
+        <div class="benefit">
+          <div class="benefit-icon">✓</div>
+          Clave válida por 10 días desde hoy
+        </div>
+      </div>
+
+      <form id="trial-form" novalidate>
+        <div class="form-group">
+          <label for="name">Nombre</label>
+          <input type="text" id="name" name="name" placeholder="Tu nombre" autocomplete="name">
+          <div class="error-msg" id="name-error">Ingresa tu nombre</div>
+        </div>
+        <div class="form-group">
+          <label for="email">Correo electrónico</label>
+          <input type="email" id="email" name="email" placeholder="tu@correo.com" autocomplete="email">
+          <div class="error-msg" id="email-error">Ingresa un correo válido</div>
+        </div>
+        <button type="submit" class="btn-submit" id="submit-btn">Enviarme mi clave de prueba</button>
+        <div id="server-error" style="display:none;margin-top:10px;font-size:13px;color:#ef4444;text-align:center;"></div>
+        <p class="form-note">Al solicitar la prueba aceptas recibir un correo con tu clave.<br>Sin spam. Puedes cancelar cuando quieras.</p>
+      </form>
+    </div>
+
+    <!-- Éxito -->
+    <div class="success-state" id="success-state">
+      <div class="success-icon">✉️</div>
+      <h2>¡Clave enviada!</h2>
+      <p>Revisa la bandeja de entrada de <span class="success-email" id="sent-to"></span></p>
+      <p style="font-size:13px;color:#94a3b8;">(Si no aparece en unos minutos, revisa la carpeta de spam)</p>
+      <div class="success-key-box" id="key-display" style="display:none;">
+        <div class="key-label">Tu clave de activación:</div>
+        <div id="key-value"></div>
+      </div>
+      <p style="font-size:14px;color:#475569;margin-top:16px;">
+        Ingresa la clave en el panel de formato de Power BI → sección <strong>Exportación</strong> → campo <strong>Clave de licencia</strong>.
+      </p>
+      <a href="index.html" class="btn-home">Volver al inicio</a>
+    </div>
+
+  </div>
+</main>
+
+<footer>Export Data PBI · <a href="mailto:support@danielmalque.com" style="color:#60a5fa;">support@danielmalque.com</a></footer>
+
+<script>
+  // ⚠ Reemplaza esta URL con la de tu Google Apps Script desplegado
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw8XZoz9t6mAIT2S-1eS7lSZffewOVNWqhojsY55TrsVYx7172f54AgylnUbQ2HaCsLzg/exec';
+
+  const form = document.getElementById('trial-form');
+  const submitBtn = document.getElementById('submit-btn');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const name  = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    let valid = true;
+
+    // Validación
+    document.getElementById('name-error').style.display  = 'none';
+    document.getElementById('email-error').style.display = 'none';
+    document.getElementById('name').classList.remove('error');
+    document.getElementById('email').classList.remove('error');
+    document.getElementById('server-error').style.display = 'none';
+
+    if (!name) {
+      document.getElementById('name-error').style.display = 'block';
+      document.getElementById('name').classList.add('error');
+      valid = false;
+    }
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      document.getElementById('email-error').style.display = 'block';
+      document.getElementById('email').classList.add('error');
+      valid = false;
+    }
+    if (!valid) return;
+
+    // Enviar
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<span class="spinner"></span>Enviando...';
+
+    try {
+      const res = await fetch(SCRIPT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email })
+      });
+      const data = await res.json();
+
+      if (data.success) {
+        document.getElementById('sent-to').textContent = email;
+        if (data.key) {
+          document.getElementById('key-value').textContent = data.key;
+          document.getElementById('key-display').style.display = 'block';
+        }
+        document.getElementById('form-state').style.display   = 'none';
+        document.getElementById('success-state').style.display = 'block';
+      } else {
+        throw new Error(data.error || 'Error desconocido');
+      }
+    } catch (err) {
+      const se = document.getElementById('server-error');
+      se.textContent = 'Ocurrió un error al enviar. Intenta de nuevo o escribe a support@danielmalque.com';
+      se.style.display = 'block';
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = 'Enviarme mi clave de prueba';
+    }
+  });
+</script>
+</body>
+</html>

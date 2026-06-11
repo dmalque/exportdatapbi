@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Export Data PBI — Exporta datos de Power BI a Excel, CSV, PDF y más</title>
+<meta name="description" content="Visual personalizado para Power BI que permite exportar datos a XLSX, CSV, PDF, TXT y JSON con formato avanzado y configuración completa.">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Segoe UI',system-ui,sans-serif;color:#1e293b;background:#fff;}
+  a{text-decoration:none;color:inherit;}
+
+  /* NAV */
+  nav{display:flex;align-items:center;justify-content:space-between;padding:18px 5%;border-bottom:1px solid #e2e8f0;position:sticky;top:0;background:#fff;z-index:100;}
+  .nav-logo{font-size:18px;font-weight:700;color:#0078d4;}
+  .nav-logo span{color:#1e293b;}
+  .nav-links{display:flex;gap:28px;align-items:center;}
+  .nav-links a{font-size:14px;color:#475569;}
+  .nav-links a:hover{color:#0078d4;}
+  .btn-nav{background:#0078d4;color:#fff !important;padding:8px 20px;border-radius:8px;font-weight:600;font-size:14px;}
+  .btn-nav:hover{background:#005fa3;}
+
+  /* HERO */
+  .hero{background:linear-gradient(135deg,#f0f7ff 0%,#e8f0fe 100%);padding:80px 5% 70px;text-align:center;}
+  .badge{display:inline-block;background:#dbeafe;color:#1d4ed8;font-size:12px;font-weight:600;padding:4px 14px;border-radius:20px;margin-bottom:20px;letter-spacing:0.5px;}
+  .hero h1{font-size:clamp(32px,5vw,54px);font-weight:800;color:#0f172a;line-height:1.15;margin-bottom:20px;}
+  .hero h1 span{color:#0078d4;}
+  .hero p{font-size:18px;color:#475569;max-width:600px;margin:0 auto 36px;line-height:1.7;}
+  .hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+  .btn-primary{background:#0078d4;color:#fff;padding:14px 32px;border-radius:10px;font-weight:700;font-size:16px;transition:all .2s;}
+  .btn-primary:hover{background:#005fa3;transform:translateY(-1px);}
+  .btn-secondary{background:#fff;color:#0078d4;padding:14px 32px;border-radius:10px;font-weight:600;font-size:16px;border:2px solid #0078d4;transition:all .2s;}
+  .btn-secondary:hover{background:#f0f7ff;}
+  .hero-note{margin-top:16px;font-size:13px;color:#94a3b8;}
+
+  /* FORMATOS */
+  .formats{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:48px;}
+  .fmt-badge{background:#fff;border:1.5px solid #e2e8f0;border-radius:8px;padding:8px 16px;font-size:14px;font-weight:600;display:flex;align-items:center;gap:6px;}
+  .fmt-badge.xlsx{border-color:#217346;color:#217346;}
+  .fmt-badge.csv{border-color:#0078d4;color:#0078d4;}
+  .fmt-badge.pdf{border-color:#dc2626;color:#dc2626;}
+  .fmt-badge.txt{border-color:#475569;color:#475569;}
+  .fmt-badge.json{border-color:#b45309;color:#b45309;}
+
+  /* SECCIONES */
+  section{padding:72px 5%;}
+  .section-title{text-align:center;font-size:clamp(24px,3vw,36px);font-weight:800;color:#0f172a;margin-bottom:12px;}
+  .section-sub{text-align:center;font-size:16px;color:#64748b;max-width:550px;margin:0 auto 52px;line-height:1.6;}
+
+  /* FEATURES */
+  .features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;max-width:1100px;margin:0 auto;}
+  .feature-card{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:28px 24px;}
+  .feature-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:16px;}
+  .feature-card h3{font-size:16px;font-weight:700;margin-bottom:8px;color:#0f172a;}
+  .feature-card p{font-size:14px;color:#64748b;line-height:1.6;}
+
+  /* STEPS */
+  .steps-bg{background:#f8fafc;}
+  .steps{display:flex;gap:24px;max-width:900px;margin:0 auto;flex-wrap:wrap;justify-content:center;}
+  .step{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:28px 24px;flex:1;min-width:220px;text-align:center;}
+  .step-num{width:40px;height:40px;background:#0078d4;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;margin:0 auto 16px;}
+  .step h3{font-size:15px;font-weight:700;margin-bottom:8px;color:#0f172a;}
+  .step p{font-size:13px;color:#64748b;line-height:1.6;}
+
+  /* PRICING */
+  .pricing-grid{display:flex;gap:24px;max-width:800px;margin:0 auto;flex-wrap:wrap;justify-content:center;}
+  .price-card{background:#fff;border:1.5px solid #e2e8f0;border-radius:16px;padding:36px 32px;flex:1;min-width:240px;}
+  .price-card.featured{border-color:#0078d4;box-shadow:0 4px 24px rgba(0,120,212,.12);}
+  .price-tag{font-size:13px;font-weight:600;background:#f1f5f9;color:#64748b;padding:4px 12px;border-radius:20px;display:inline-block;margin-bottom:16px;}
+  .price-tag.trial{background:#dbeafe;color:#1d4ed8;}
+  .price-card h3{font-size:22px;font-weight:800;margin-bottom:8px;}
+  .price-amount{font-size:36px;font-weight:800;color:#0078d4;margin-bottom:4px;}
+  .price-amount span{font-size:16px;font-weight:400;color:#94a3b8;}
+  .price-desc{font-size:14px;color:#64748b;margin-bottom:24px;line-height:1.5;}
+  .price-features{list-style:none;margin-bottom:28px;}
+  .price-features li{font-size:14px;color:#475569;padding:6px 0;border-bottom:1px solid #f1f5f9;display:flex;align-items:center;gap:8px;}
+  .price-features li::before{content:"✓";color:#0078d4;font-weight:700;flex-shrink:0;}
+  .btn-full{display:block;text-align:center;background:#0078d4;color:#fff;padding:13px;border-radius:10px;font-weight:700;font-size:15px;transition:all .2s;}
+  .btn-full:hover{background:#005fa3;}
+  .btn-full.outline{background:#fff;color:#0078d4;border:2px solid #0078d4;}
+  .btn-full.outline:hover{background:#f0f7ff;}
+
+  /* FOOTER */
+  footer{background:#0f172a;color:#94a3b8;padding:40px 5%;text-align:center;}
+  footer p{font-size:13px;line-height:1.8;}
+  footer a{color:#60a5fa;}
+
+  @media(max-width:600px){
+    .nav-links{display:none;}
+    .hero{padding:50px 5%;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Export<span>DataPBI</span></div>
+  <div class="nav-links">
+    <a href="#features">Funciones</a>
+    <a href="#how">Cómo funciona</a>
+    <a href="#pricing">Precios</a>
+    <a href="trial.html" class="btn-nav">Prueba gratis 10 días</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="badge">Visual personalizado para Microsoft Power BI</div>
+  <h1>Exporta tus datos de Power BI<br><span>sin límites de licencia</span></h1>
+  <p>Descarga hasta 500.000 registros en Excel, CSV, PDF, TXT o JSON directamente desde tus informes. Sin necesidad de Power BI Premium.</p>
+  <div class="hero-btns">
+    <a href="trial.html" class="btn-primary">Probar gratis 10 días</a>
+    <a href="#pricing" class="btn-secondary">Ver precios</a>
+  </div>
+  <p class="hero-note">Sin tarjeta de crédito · Clave de prueba en tu correo en segundos</p>
+  <div class="formats">
+    <span class="fmt-badge xlsx">📊 Excel XLSX</span>
+    <span class="fmt-badge csv">📄 CSV</span>
+    <span class="fmt-badge pdf">📕 PDF</span>
+    <span class="fmt-badge txt">📝 TXT</span>
+    <span class="fmt-badge json">{ } JSON</span>
+  </div>
+</section>
+
+<section id="features">
+  <h2 class="section-title">Todo lo que necesitas para exportar</h2>
+  <p class="section-sub">Un visual completamente configurable desde el panel de formato de Power BI, sin código adicional.</p>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon" style="background:#dbeafe;">📊</div>
+      <h3>Hasta 500.000 registros</h3>
+      <p>Exporta grandes volúmenes de datos con carga progresiva. Sin límites artificiales de Power BI Service.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon" style="background:#dcfce7;">🎨</div>
+      <h3>Excel con formato avanzado</h3>
+      <p>Colores de encabezado, filas alternadas, bordes y formato condicional por rangos numéricos (hasta 5 reglas).</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon" style="background:#fee2e2;">📕</div>
+      <h3>Exportación a PDF</h3>
+      <p>Genera tablas en PDF con tu color corporativo, orientación horizontal y marca de fecha automática.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon" style="background:#fef3c7;">⚙️</div>
+      <h3>Totalmente configurable</h3>
+      <p>Modo oscuro, layouts compacto y expandido, estilos de botones, formato de fecha y transparencia del visual.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon" style="background:#f3e8ff;">🔒</div>
+      <h3>Funciona en Published to Web</h3>
+      <p>Compatible con informes publicados públicamente. La descarga funciona directamente desde el navegador del usuario.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon" style="background:#e0f2fe;">🚀</div>
+      <h3>Sin dependencias externas</h3>
+      <p>No realiza llamadas a servidores. Todo el procesamiento es local en el navegador. Funciona offline.</p>
+    </div>
+  </div>
+</section>
+
+<section id="how" class="steps-bg">
+  <h2 class="section-title">Cómo funciona en 3 pasos</h2>
+  <p class="section-sub">Instalación en minutos, sin configuraciones complejas.</p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h3>Instala el visual</h3>
+      <p>Descárgalo desde Microsoft AppSource e impórtalo en tu informe de Power BI Desktop o Service.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h3>Ingresa tu clave</h3>
+      <p>Activa el visual con tu clave de licencia desde el panel de formato. Validación instantánea sin conexión.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h3>Exporta tus datos</h3>
+      <p>Arrastra tus campos al visual, elige el formato y descarga. Así de simple.</p>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <h2 class="section-title">Precios simples y transparentes</h2>
+  <p class="section-sub">Prueba el visual completo durante 10 días sin costo. Sin sorpresas.</p>
+  <div class="pricing-grid">
+    <div class="price-card">
+      <span class="price-tag trial">Prueba gratuita</span>
+      <h3>Trial</h3>
+      <div class="price-amount">$0 <span>/ 10 días</span></div>
+      <p class="price-desc">Acceso completo a todas las funciones sin restricciones.</p>
+      <ul class="price-features">
+        <li>Todos los formatos de exportación</li>
+        <li>Hasta 500.000 registros</li>
+        <li>Formato condicional Excel</li>
+        <li>Exportación PDF</li>
+        <li>Soporte por correo</li>
+      </ul>
+      <a href="trial.html" class="btn-full outline">Solicitar prueba gratuita</a>
+    </div>
+    <div class="price-card featured">
+      <span class="price-tag">Licencia completa</span>
+      <h3>Pro</h3>
+      <div class="price-amount">$29 <span>/ vitalicia</span></div>
+      <p class="price-desc">Un solo pago, acceso permanente y todas las actualizaciones futuras.</p>
+      <ul class="price-features">
+        <li>Todo lo del plan Trial</li>
+        <li>Licencia vitalicia (sin renovaciones)</li>
+        <li>Actualizaciones incluidas</li>
+        <li>Soporte prioritario</li>
+        <li>1 clave por compra</li>
+      </ul>
+      <a href="#" class="btn-full" id="btn-buy">Comprar ahora</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Export Data PBI · Desarrollado por <strong style="color:#e2e8f0;">Daniel Malque</strong></p>
+  <p style="margin-top:8px;">
+    <a href="mailto:support@danielmalque.com">support@danielmalque.com</a>
+    &nbsp;·&nbsp;
+    <a href="#">Política de privacidad</a>
+  </p>
+  <p style="margin-top:12px;font-size:12px;">Microsoft Power BI y AppSource son marcas registradas de Microsoft Corporation.</p>
+</footer>
+
+</body>
+</html>
