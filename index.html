@@ -37,19 +37,19 @@
   .hero-pill .dot{width:7px;height:7px;border-radius:50%;background:#16a34a;flex-shrink:0;}
 
   /* PROBLEMS SECTION */
-  .problems-section{background:#0f172a;padding:44px 5%;}
+  .problems-section{background:linear-gradient(135deg,#f0f7ff 0%,#e8f0fe 100%);padding:44px 5%;border-top:1px solid #dbeafe;border-bottom:1px solid #dbeafe;}
   .problems-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;}
   .problems-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-  .problem-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:16px;}
-  .problem-card .prob{font-size:12px;color:#fca5a5;font-weight:600;display:flex;align-items:flex-start;gap:6px;margin-bottom:6px;line-height:1.4;}
+  .problem-card{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:16px;box-shadow:0 1px 4px rgba(0,0,0,.04);}
+  .problem-card .prob{font-size:12px;color:#dc2626;font-weight:600;display:flex;align-items:flex-start;gap:6px;margin-bottom:6px;line-height:1.4;}
   .problem-card .prob span{flex-shrink:0;}
-  .problem-card .sol{font-size:12px;color:#86efac;font-weight:600;display:flex;align-items:flex-start;gap:6px;margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,.06);line-height:1.4;}
+  .problem-card .sol{font-size:12px;color:#16a34a;font-weight:600;display:flex;align-items:flex-start;gap:6px;margin-top:8px;padding-top:8px;border-top:1px solid #f1f5f9;line-height:1.4;}
   .problem-card .sol span{flex-shrink:0;}
   .preview-side{flex-shrink:0;text-align:center;}
-  .preview-frame{background:#1e293b;border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:22px 20px;display:inline-block;}
-  .preview-label{font-size:10px;font-weight:600;letter-spacing:.6px;text-transform:uppercase;color:#475569;margin-bottom:12px;}
+  .preview-frame{background:#fff;border:1.5px solid #bfdbfe;border-radius:14px;padding:22px 20px;display:inline-block;box-shadow:0 2px 12px rgba(0,120,212,.08);}
+  .preview-label{font-size:10px;font-weight:600;letter-spacing:.6px;text-transform:uppercase;color:#64748b;margin-bottom:12px;}
   .preview-img{display:block;max-width:260px;width:100%;border-radius:8px;}
-  .preview-caption{font-size:11px;color:#475569;margin-top:12px;line-height:1.5;}
+  .preview-caption{font-size:11px;color:#64748b;margin-top:12px;line-height:1.5;}
 
   /* SECTIONS */
   section{padding:48px 5%;}
@@ -208,7 +208,7 @@
         <div class="preview-frame">
           <div class="preview-label">Vista previa del visual</div>
           <img src="preview-visual.png" alt="Botones de exportación del visual" class="preview-img">
-          <div class="preview-caption">El usuario elige el formato<br>y descarga en un clic.</div>
+          <div class="preview-caption">El usuario elige el formato, se genera<br>el link de descarga y puede descargar<br>su archivo conservando los filtros.</div>
         </div>
       </div>
     </div>
