@@ -172,8 +172,9 @@
     try {
       const res = await fetch(SCRIPT_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email })
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify({ name, email }),
+        redirect: 'follow'
       });
       const data = await res.json();
 
@@ -190,7 +191,7 @@
       }
     } catch (err) {
       const se = document.getElementById('server-error');
-      se.textContent = 'Ocurrió un error al enviar. Intenta de nuevo o escribe a support@danielmalque.com';
+      se.textContent = 'Ocurrió un error al enviar. Intenta de nuevo o escribe a exportdatapbi@gmail.com';
       se.style.display = 'block';
       submitBtn.disabled = false;
       submitBtn.innerHTML = 'Enviarme mi clave de prueba';
