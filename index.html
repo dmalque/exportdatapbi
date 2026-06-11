@@ -190,7 +190,7 @@
     <div id="billing-toggle" onclick="toggleBilling()" style="width:48px;height:26px;background:#e2e8f0;border-radius:13px;cursor:pointer;position:relative;transition:background .2s;">
       <div id="toggle-knob" style="width:20px;height:20px;background:#fff;border-radius:50%;position:absolute;top:3px;left:3px;transition:transform .2s;box-shadow:0 1px 4px rgba(0,0,0,.2);"></div>
     </div>
-    <span id="lbl-annual" style="font-size:14px;color:#94a3b8;">Anual <span style="background:#dcfce7;color:#15803d;font-size:11px;font-weight:600;padding:2px 8px;border-radius:20px;margin-left:4px;">2 meses gratis</span></span>
+    <span id="lbl-annual" style="font-size:14px;color:#94a3b8;">Anual <span id="badge-annual" style="display:none;background:#dcfce7;color:#15803d;font-size:11px;font-weight:600;padding:2px 8px;border-radius:20px;margin-left:4px;">Ahorras $27</span></span>
   </div>
 
   <!-- Planes de suscripción -->
@@ -260,7 +260,7 @@
 <script>
 var isAnnual = false;
 var prices = {
-  starter:  { monthly: '$8',  annual: '$59',  periodM: '/ mes', periodA: '/ año', descM: 'Facturado mensualmente.', descA: 'Equivale a $4.90/mes. Ahorras $37.' },
+  starter:  { monthly: '$8',  annual: '$69',  periodM: '/ mes', periodA: '/ año', descM: 'Facturado mensualmente.', descA: 'Equivale a $5.75/mes. Ahorras $27.' },
   ent:      { monthly: '$45', annual: '$349', periodM: '/ mes', periodA: '/ año', descM: 'Facturado mensualmente.', descA: 'Equivale a $29.10/mes. Ahorras $191.' }
 };
 function toggleBilling() {
@@ -279,6 +279,7 @@ function toggleBilling() {
   });
   document.getElementById('btn-starter').href   = 'purchase.html?plan=starter-'   + (isAnnual ? 'annual' : 'monthly');
   document.getElementById('btn-enterprise').href = 'purchase.html?plan=enterprise-' + (isAnnual ? 'annual' : 'monthly');
+  document.getElementById('badge-annual').style.display = isAnnual ? 'inline' : 'none';
 }
 </script>
 
