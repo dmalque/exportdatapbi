@@ -36,14 +36,20 @@
   .hero-pill{background:#fff;border:1.5px solid #e2e8f0;border-radius:30px;padding:8px 16px;font-size:13px;font-weight:600;color:#374151;display:flex;align-items:center;gap:7px;}
   .hero-pill .dot{width:8px;height:8px;border-radius:50%;background:#16a34a;flex-shrink:0;}
 
-  /* PAIN STRIP */
-  .pain-strip{background:#0f172a;padding:0 5%;}
-  .pain-strip-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));}
-  .pain-item{padding:28px 24px;border-right:1px solid rgba(255,255,255,.07);}
-  .pain-item:last-child{border-right:none;}
-  .pain-label{font-size:11px;font-weight:700;letter-spacing:.7px;color:#475569;text-transform:uppercase;margin-bottom:8px;}
-  .pain-text{font-size:14px;color:#94a3b8;line-height:1.55;}
-  .pain-text strong{color:#fca5a5;}
+  /* PROBLEMS SECTION */
+  .problems-section{background:#0f172a;padding:64px 5%;}
+  .problems-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center;}
+  .problems-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .problem-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:20px;}
+  .problem-card .prob{font-size:13px;color:#fca5a5;font-weight:600;display:flex;align-items:flex-start;gap:7px;margin-bottom:6px;line-height:1.4;}
+  .problem-card .prob span{flex-shrink:0;}
+  .problem-card .sol{font-size:13px;color:#86efac;font-weight:600;display:flex;align-items:flex-start;gap:7px;margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.06);line-height:1.4;}
+  .problem-card .sol span{flex-shrink:0;}
+  .preview-side{flex-shrink:0;text-align:center;}
+  .preview-frame{background:#1e293b;border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:28px 24px;display:inline-block;}
+  .preview-label{font-size:11px;font-weight:600;letter-spacing:.6px;text-transform:uppercase;color:#475569;margin-bottom:16px;}
+  .preview-img{display:block;max-width:300px;width:100%;border-radius:8px;}
+  .preview-caption{font-size:12px;color:#475569;margin-top:14px;line-height:1.5;}
 
   /* SECTIONS */
   section{padding:72px 5%;}
@@ -116,8 +122,10 @@
   @media(max-width:700px){
     .nav-links{display:none;}
     .hero{padding:52px 5% 56px;}
-    .pain-item{border-right:none;border-bottom:1px solid rgba(255,255,255,.07);}
-    .pain-item:last-child{border-bottom:none;}
+    .problems-inner{grid-template-columns:1fr;}
+    .problems-grid{grid-template-columns:1fr;}
+    .preview-side{width:100%;}
+    .preview-img{max-width:100%;}
     .star-box{padding:26px 22px;}
     .step-arrow{display:none;}
   }
@@ -154,24 +162,47 @@
   </div>
 </section>
 
-<!-- ─── PAIN STRIP ────────────────────────────────────────── -->
-<div class="pain-strip">
-  <div class="pain-strip-inner">
-    <div class="pain-item">
-      <div class="pain-label">Problema 1</div>
-      <div class="pain-text">En informes <strong>Published to Web</strong>, Power BI desactiva la exportación nativa por completo.</div>
-    </div>
-    <div class="pain-item">
-      <div class="pain-label">Problema 2</div>
-      <div class="pain-text">La exportación nativa <strong>exige que cada usuario inicie sesión</strong> con una cuenta de Microsoft.</div>
-    </div>
-    <div class="pain-item">
-      <div class="pain-label">Problema 3</div>
-      <div class="pain-text">El límite nativo corta los datos en <strong>~150.000 filas</strong>. Las tablas grandes quedan incompletas.</div>
-    </div>
-    <div class="pain-item">
-      <div class="pain-label">Problema 4</div>
-      <div class="pain-text">El Excel nativo sale <strong>sin formato</strong>: sin colores, sin encabezados, sin estructura corporativa.</div>
+<!-- ─── PROBLEMS + PREVIEW ────────────────────────────────── -->
+<div class="problems-section">
+  <div style="max-width:1100px;margin:0 auto;">
+    <p style="font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#475569;margin-bottom:10px;">Por qué la exportación nativa no es suficiente</p>
+    <h2 style="font-size:clamp(20px,2.8vw,30px);font-weight:800;color:#f1f5f9;margin-bottom:40px;">4 problemas reales — resueltos con Export Data PBI</h2>
+    <div class="problems-inner">
+
+      <!-- Tarjetas problema/solución -->
+      <div class="problems-grid">
+
+        <div class="problem-card">
+          <div class="prob"><span>✕</span>Published to Web deshabilita la exportación nativa por completo.</div>
+          <div class="sol"><span>✓</span>Funciona en cualquier informe publicado públicamente.</div>
+        </div>
+
+        <div class="problem-card">
+          <div class="prob"><span>✕</span>Cada usuario necesita iniciar sesión con cuenta Microsoft.</div>
+          <div class="sol"><span>✓</span>Ningún usuario necesita cuenta ni licencia de Power BI.</div>
+        </div>
+
+        <div class="problem-card">
+          <div class="prob"><span>✕</span>El límite nativo corta los datos en ~150.000 filas.</div>
+          <div class="sol"><span>✓</span>Exporta hasta 500.000 registros sin truncar.</div>
+        </div>
+
+        <div class="problem-card">
+          <div class="prob"><span>✕</span>El Excel exportado sale plano: sin colores ni estructura.</div>
+          <div class="sol"><span>✓</span>XLSX con formato, colores corporativos y condicional.</div>
+        </div>
+
+      </div>
+
+      <!-- Preview del visual -->
+      <div class="preview-side">
+        <div class="preview-frame">
+          <div class="preview-label">Vista previa del visual</div>
+          <img src="preview-visual.png" alt="Botones de exportación del visual" class="preview-img">
+          <div class="preview-caption">El usuario elige el formato<br>y descarga en un clic.</div>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
