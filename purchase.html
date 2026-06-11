@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solicitud de licencia — Export Data PBI</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Segoe UI',system-ui,sans-serif;color:#1e293b;background:#f8fafc;min-height:100vh;display:flex;flex-direction:column;}
+  a{text-decoration:none;color:inherit;}
+  nav{display:flex;align-items:center;justify-content:space-between;padding:18px 5%;border-bottom:1px solid #e2e8f0;background:#fff;}
+  .nav-logo{font-size:18px;font-weight:700;color:#0078d4;}
+  .nav-logo span{color:#1e293b;}
+  .back-link{font-size:14px;color:#64748b;display:flex;align-items:center;gap:6px;}
+  .back-link:hover{color:#0078d4;}
+  main{flex:1;display:flex;justify-content:center;padding:40px 20px;}
+  .layout{display:flex;gap:32px;width:100%;max-width:880px;align-items:flex-start;}
+  .sidebar{width:260px;flex-shrink:0;}
+  .sidebar-card{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:24px;margin-bottom:16px;}
+  .plan-selected{background:#f0f7ff;border:1.5px solid #bfdbfe;border-radius:12px;padding:20px;}
+  .plan-label{font-size:11px;font-weight:700;color:#1d4ed8;letter-spacing:.5px;text-transform:uppercase;margin-bottom:6px;}
+  .plan-name{font-size:20px;font-weight:800;color:#0f172a;margin-bottom:4px;}
+  .plan-price{font-size:28px;font-weight:800;color:#0078d4;}
+  .plan-price span{font-size:14px;font-weight:400;color:#94a3b8;}
+  .plan-features{list-style:none;margin-top:14px;}
+  .plan-features li{font-size:13px;color:#475569;padding:5px 0;display:flex;align-items:center;gap:7px;border-bottom:1px solid #f1f5f9;}
+  .plan-features li::before{content:"✓";color:#0078d4;font-weight:700;flex-shrink:0;}
+  .secure-note{font-size:12px;color:#64748b;display:flex;align-items:center;gap:6px;margin-top:12px;}
+  .card{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:36px 32px;flex:1;}
+  .card h1{font-size:22px;font-weight:800;color:#0f172a;margin-bottom:6px;}
+  .card-sub{font-size:14px;color:#64748b;margin-bottom:28px;line-height:1.6;}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .form-group{margin-bottom:16px;}
+  .form-group.full{grid-column:1/-1;}
+  label{display:block;font-size:13px;font-weight:600;color:#374151;margin-bottom:5px;}
+  label .req{color:#ef4444;margin-left:2px;}
+  input,select,textarea{width:100%;padding:10px 13px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:14px;font-family:inherit;color:#0f172a;transition:border .2s;outline:none;background:#fff;}
+  input:focus,select:focus,textarea:focus{border-color:#0078d4;}
+  input::placeholder,textarea::placeholder{color:#94a3b8;}
+  input.error,select.error,textarea.error{border-color:#ef4444;}
+  .error-msg{font-size:12px;color:#ef4444;margin-top:4px;display:none;}
+  textarea{resize:vertical;min-height:90px;}
+  .divider{border:none;border-top:1px solid #f1f5f9;margin:20px 0;}
+  .section-label{font-size:11px;font-weight:700;color:#94a3b8;letter-spacing:.5px;text-transform:uppercase;margin-bottom:14px;}
+  .btn-submit{width:100%;background:#0078d4;color:#fff;border:none;padding:14px;border-radius:10px;font-size:16px;font-weight:700;cursor:pointer;transition:all .2s;font-family:inherit;margin-top:8px;}
+  .btn-submit:hover{background:#005fa3;}
+  .btn-submit:disabled{background:#93c5fd;cursor:not-allowed;}
+  .form-note{font-size:12px;color:#94a3b8;text-align:center;margin-top:12px;line-height:1.6;}
+  .spinner{width:18px;height:18px;border:3px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;display:inline-block;vertical-align:middle;margin-right:8px;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .success-state{display:none;text-align:center;padding:20px 0;}
+  .success-icon{width:64px;height:64px;background:#dcfce7;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:30px;margin:0 auto 20px;}
+  .success-state h2{font-size:22px;font-weight:800;color:#0f172a;margin-bottom:10px;}
+  .success-state p{font-size:15px;color:#64748b;line-height:1.7;margin-bottom:6px;}
+  .btn-home{display:inline-block;margin-top:20px;background:#0078d4;color:#fff;padding:12px 28px;border-radius:10px;font-weight:600;font-size:15px;}
+  .btn-home:hover{background:#005fa3;}
+  footer{padding:20px 5%;text-align:center;font-size:12px;color:#94a3b8;}
+  @media(max-width:700px){.layout{flex-direction:column;}.sidebar{width:100%;}.form-row{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Export<span>DataPBI</span></div>
+  <a href="https://dmalque.github.io/exportdatapbi" class="back-link">← Volver al inicio</a>
+</nav>
+
+<main>
+  <div class="layout">
+
+    <!-- Sidebar con resumen del plan -->
+    <div class="sidebar">
+      <div class="plan-selected">
+        <div class="plan-label">Plan seleccionado</div>
+        <div class="plan-name" id="sb-plan-name">Starter</div>
+        <div class="plan-price" id="sb-price">$8 <span id="sb-period">/ mes</span></div>
+        <ul class="plan-features" id="sb-features"></ul>
+      </div>
+      <div class="sidebar-card" style="margin-top:16px;">
+        <div class="secure-note">🔒 Pago gestionado de forma segura. Recibirás tu clave por correo una vez confirmado.</div>
+      </div>
+      <div class="sidebar-card">
+        <p style="font-size:13px;color:#475569;line-height:1.6;">¿Tienes preguntas antes de comprar? Escríbenos a<br><a href="mailto:exportdatapbi@gmail.com" style="color:#0078d4;font-weight:600;">exportdatapbi@gmail.com</a></p>
+      </div>
+    </div>
+
+    <!-- Formulario -->
+    <div class="card">
+
+      <div id="form-state">
+        <h1>Solicitud de licencia</h1>
+        <p class="card-sub">Completa el formulario y nos pondremos en contacto contigo en menos de 24 horas hábiles para coordinar el pago y enviarte tu clave de activación.</p>
+
+        <form id="purchase-form" novalidate>
+
+          <div class="section-label">Información de contacto</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Nombre completo <span class="req">*</span></label>
+              <input type="text" id="name" placeholder="Tu nombre completo" autocomplete="name">
+              <div class="error-msg" id="name-error">Campo requerido</div>
+            </div>
+            <div class="form-group">
+              <label>Correo electrónico <span class="req">*</span></label>
+              <input type="email" id="email" placeholder="tu@correo.com" autocomplete="email">
+              <div class="error-msg" id="email-error">Ingresa un correo válido</div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Empresa / Organización</label>
+              <input type="text" id="company" placeholder="Nombre de tu empresa (opcional)">
+            </div>
+            <div class="form-group">
+              <label>País <span class="req">*</span></label>
+              <select id="country">
+                <option value="">Selecciona tu país</option>
+                <option>Guatemala</option><option>México</option><option>Colombia</option>
+                <option>Argentina</option><option>Chile</option><option>Perú</option>
+                <option>Ecuador</option><option>Bolivia</option><option>Venezuela</option>
+                <option>Uruguay</option><option>Paraguay</option><option>Costa Rica</option>
+                <option>Panamá</option><option>Honduras</option><option>El Salvador</option>
+                <option>Nicaragua</option><option>República Dominicana</option>
+                <option>España</option><option>Estados Unidos</option><option>Otro</option>
+              </select>
+              <div class="error-msg" id="country-error">Selecciona tu país</div>
+            </div>
+          </div>
+
+          <hr class="divider">
+          <div class="section-label">Detalles del plan</div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Plan <span class="req">*</span></label>
+              <select id="plan" onchange="updatePlan()">
+                <option value="starter-monthly">Starter — $8/mes</option>
+                <option value="starter-annual">Starter — $59/año</option>
+                <option value="enterprise-monthly">Enterprise — $45/mes</option>
+                <option value="enterprise-annual">Enterprise — $349/año</option>
+                <option value="lifetime">Lifetime — $249 pago único</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Número de usuarios estimado</label>
+              <select id="users">
+                <option>1 usuario</option>
+                <option>2 - 5 usuarios</option>
+                <option>6 - 10 usuarios</option>
+                <option>11 - 25 usuarios</option>
+                <option>Más de 25 usuarios</option>
+              </select>
+            </div>
+          </div>
+
+          <hr class="divider">
+          <div class="section-label">Información adicional</div>
+
+          <div class="form-group">
+            <label>¿Cómo conociste Export Data PBI?</label>
+            <select id="source">
+              <option value="">Selecciona una opción</option>
+              <option>Microsoft AppSource</option>
+              <option>Búsqueda en Google</option>
+              <option>Recomendación de un colega</option>
+              <option>LinkedIn</option>
+              <option>YouTube</option>
+              <option>Otro</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Mensaje o comentarios adicionales</label>
+            <textarea id="message" placeholder="Cuéntanos sobre tu caso de uso, requerimientos especiales, o cualquier pregunta que tengas..."></textarea>
+          </div>
+
+          <div id="server-error" style="display:none;margin-bottom:10px;font-size:13px;color:#ef4444;text-align:center;background:#fef2f2;padding:10px;border-radius:8px;"></div>
+          <button type="submit" class="btn-submit" id="submit-btn">Enviar solicitud de licencia</button>
+          <p class="form-note">Te responderemos en menos de 24 horas hábiles con los detalles del pago.<br>Sin compromisos hasta confirmar la compra.</p>
+        </form>
+      </div>
+
+      <!-- Éxito -->
+      <div class="success-state" id="success-state">
+        <div class="success-icon">📩</div>
+        <h2>¡Solicitud recibida!</h2>
+        <p>Hemos recibido tu solicitud para el plan <strong id="sent-plan"></strong>.</p>
+        <p>Te contactaremos en las próximas 24 horas hábiles a <strong id="sent-email" style="color:#0078d4;"></strong> con los detalles del pago y tu clave de activación.</p>
+        <p style="font-size:13px;color:#94a3b8;margin-top:8px;">Si tienes alguna duda puedes escribirnos a exportdatapbi@gmail.com</p>
+        <a href="https://dmalque.github.io/exportdatapbi" class="btn-home">Volver al inicio</a>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<footer>Export Data PBI · <a href="mailto:exportdatapbi@gmail.com" style="color:#60a5fa;">exportdatapbi@gmail.com</a></footer>
+
+<script>
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby9KQLVX808QW2EqFZm0nMWEYZ_0hDm2pzuSyg3eDssRzbfDwo7yTHMHpbI-xqSo78/exec';
+
+  const PLANS = {
+    'starter-monthly':   { name:'Starter',    price:'$8',   period:'/mes',        features:['1 clave de licencia','Todos los formatos de exportación','Hasta 500.000 registros','Actualizaciones incluidas','Soporte por correo'] },
+    'starter-annual':    { name:'Starter',    price:'$59',  period:'/año',        features:['1 clave de licencia','Todos los formatos de exportación','Hasta 500.000 registros','Actualizaciones incluidas','Soporte por correo'] },
+    'enterprise-monthly':{ name:'Enterprise', price:'$45',  period:'/mes',        features:['Claves ilimitadas','Todo el plan Starter','Despliegue en toda la organización','Soporte dedicado','Factura para empresas'] },
+    'enterprise-annual': { name:'Enterprise', price:'$349', period:'/año',        features:['Claves ilimitadas','Todo el plan Starter','Despliegue en toda la organización','Soporte dedicado','Factura para empresas'] },
+    'lifetime':          { name:'Lifetime',   price:'$249', period:'pago único',  features:['Claves ilimitadas','Actualizaciones de por vida','Sin renovaciones','Soporte incluido','Factura para empresas'] }
+  };
+
+  function updatePlan() {
+    var key  = document.getElementById('plan').value;
+    var plan = PLANS[key];
+    document.getElementById('sb-plan-name').textContent = plan.name;
+    document.getElementById('sb-price').innerHTML = plan.price + ' <span id="sb-period">' + plan.period + '</span>';
+    var ul = document.getElementById('sb-features');
+    ul.innerHTML = plan.features.map(function(f){ return '<li>' + f + '</li>'; }).join('');
+  }
+
+  // Leer plan desde URL param
+  var params = new URLSearchParams(window.location.search);
+  var planParam = params.get('plan') || 'starter-monthly';
+  if (PLANS[planParam]) {
+    document.getElementById('plan').value = planParam;
+  }
+  updatePlan();
+
+  document.getElementById('purchase-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    var name    = document.getElementById('name').value.trim();
+    var email   = document.getElementById('email').value.trim();
+    var country = document.getElementById('country').value;
+    var plan    = document.getElementById('plan').value;
+    var company = document.getElementById('company').value.trim();
+    var users   = document.getElementById('users').value;
+    var source  = document.getElementById('source').value;
+    var message = document.getElementById('message').value.trim();
+    var valid   = true;
+
+    ['name-error','email-error','country-error'].forEach(function(id){ document.getElementById(id).style.display='none'; });
+    ['name','email','country'].forEach(function(id){ document.getElementById(id).classList.remove('error'); });
+    document.getElementById('server-error').style.display = 'none';
+
+    if (!name)  { document.getElementById('name-error').style.display='block';    document.getElementById('name').classList.add('error');    valid=false; }
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { document.getElementById('email-error').style.display='block'; document.getElementById('email').classList.add('error'); valid=false; }
+    if (!country){ document.getElementById('country-error').style.display='block'; document.getElementById('country').classList.add('error'); valid=false; }
+    if (!valid) return;
+
+    var btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span>Enviando solicitud...';
+
+    try {
+      const res = await fetch(SCRIPT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify({ type:'purchase', name, email, company, country, plan, users, source, message }),
+        redirect: 'follow'
+      });
+      const data = await res.json();
+      if (data.success) {
+        document.getElementById('sent-plan').textContent  = PLANS[plan].name + ' ' + PLANS[plan].price;
+        document.getElementById('sent-email').textContent = email;
+        document.getElementById('form-state').style.display   = 'none';
+        document.getElementById('success-state').style.display = 'block';
+      } else {
+        throw new Error(data.error || 'Error desconocido');
+      }
+    } catch(err) {
+      var se = document.getElementById('server-error');
+      se.textContent = 'Ocurrió un error al enviar. Intenta de nuevo o escribe a exportdatapbi@gmail.com';
+      se.style.display = 'block';
+      btn.disabled = false;
+      btn.innerHTML = 'Enviar solicitud de licencia';
+    }
+  });
+</script>
+</body>
+</html>

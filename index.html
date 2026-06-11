@@ -209,7 +209,7 @@
         <li>Actualizaciones incluidas</li>
         <li>Soporte por correo</li>
       </ul>
-      <a href="#" class="btn-full outline">Comenzar</a>
+      <a id="btn-starter" href="purchase.html?plan=starter-monthly" class="btn-full outline">Comenzar</a>
     </div>
 
     <!-- Enterprise -->
@@ -225,7 +225,7 @@
         <li>Soporte dedicado</li>
         <li>Factura para empresas</li>
       </ul>
-      <a href="#" class="btn-full outline">Contactar</a>
+      <a id="btn-enterprise" href="purchase.html?plan=enterprise-monthly" class="btn-full outline">Contactar</a>
     </div>
 
   </div>
@@ -245,7 +245,7 @@
     <div style="text-align:center;flex-shrink:0;">
       <div style="font-size:42px;font-weight:800;color:#0078d4;">$249</div>
       <div style="font-size:13px;color:#64748b;margin-bottom:16px;">pago único · IVA no incluido</div>
-      <a href="#" style="display:inline-block;background:#0078d4;color:#fff;padding:13px 32px;border-radius:10px;font-weight:700;font-size:15px;white-space:nowrap;">Obtener Lifetime</a>
+      <a href="purchase.html?plan=lifetime" style="display:inline-block;background:#0078d4;color:#fff;padding:13px 32px;border-radius:10px;font-weight:700;font-size:15px;white-space:nowrap;">Obtener Lifetime</a>
     </div>
   </div>
 
@@ -277,6 +277,8 @@ function toggleBilling() {
     document.getElementById('period-'+k).textContent = prices[k][pMode];
     document.getElementById('desc-'+k).textContent   = prices[k][dMode];
   });
+  document.getElementById('btn-starter').href   = 'purchase.html?plan=starter-'   + (isAnnual ? 'annual' : 'monthly');
+  document.getElementById('btn-enterprise').href = 'purchase.html?plan=enterprise-' + (isAnnual ? 'annual' : 'monthly');
 }
 </script>
 
