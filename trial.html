@@ -180,10 +180,6 @@
 
       if (data.success) {
         document.getElementById('sent-to').textContent = email;
-        if (data.key) {
-          document.getElementById('key-value').textContent = data.key;
-          document.getElementById('key-display').style.display = 'block';
-        }
         document.getElementById('form-state').style.display   = 'none';
         document.getElementById('success-state').style.display = 'block';
       } else {
